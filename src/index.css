@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@keyframes valora-roll {
+  from {
+    transform: translateX(-70vw) rotate(-720deg);
+  }
+  to {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+.valora-roll {
+  animation: valora-roll 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes valora-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.valora-fade-up {
+  animation: valora-fade-up 0.45s ease-out both;
+}
+
+.valora-perf *,
+.valora-perf *::before,
+.valora-perf *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.valora-perf .valora-glow {
+  display: none;
+}
+
+:root {
+  --glass-rgb: 255 255 255;
+  --glass-alpha: 0.6;
+}
+
+.dark {
+  --glass-rgb: 15 23 42;
+}
+
+.valora-glass {
+  background-color: rgb(var(--glass-rgb) / var(--glass-alpha));
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.45),
+    inset 0 0 0 1px rgb(255 255 255 / 0.08),
+    0 12px 32px -12px rgb(15 23 42 / 0.25);
+}
+
+.valora-perf .valora-glass {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.valora-wallpaper {
+  background-color: #dbeafe;
+  background-image:
+    url('/wallpaper-light.png'),
+    linear-gradient(160deg, #e0f2fe 0%, #38bdf8 40%, #2563eb 70%, #67e8f9 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+.dark .valora-wallpaper {
+  background-color: #020617;
+  background-image: url('/wallpaper.png');
+}
+
+.valora-stretch {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.valora-stretch:hover {
+  transform: scale(1.04, 1.06);
+}
+
+.valora-stretch:active {
+  transform: scale(0.96, 0.98);
+}
+
+@keyframes valora-tab-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92, 0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.valora-tab-enter {
+  animation: valora-tab-in 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes valora-tab-out {
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(0.85, 0.9);
+  }
+}
+
+.valora-tab-leave {
+  animation: valora-tab-out 0.2s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes valora-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.valora-page-in {
+  animation: valora-page-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
