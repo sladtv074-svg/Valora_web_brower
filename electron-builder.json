@@ -1,0 +1,20 @@
+{
+  "appId": "com.valora.browser",
+  "productName": "Valora",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "electron/**/*",
+    "package.json"
+  ],
+  "linux": {
+    "target": ["deb"],
+    "icon": "public/logo.png",
+    "category": "Network"
+  },
+  "deb": {
+    "maintainer": "Valora"
+  }
+}
