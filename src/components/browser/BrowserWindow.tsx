@@ -44,7 +44,6 @@ export function BrowserWindow() {
   const [aiOpen, setAiOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [dark, setDark] = useState(true);
-  const [performance, setPerformance] = useState(true);
 
   const activeTab = tabs.find((tab) => tab.id === activeTabId) ?? tabs[0];
   const currentUrl = activeTab.entries[activeTab.index];
@@ -133,8 +132,6 @@ export function BrowserWindow() {
             quickLinks={getQuickLinks(activity)}
             onNavigate={navigateToInput}
             onOpenFavorites={() => setView('favorites')}
-            performance={performance}
-            onTogglePerformance={setPerformance}
           />
         ) : (
           <PageView url={currentUrl} reloadKey={activeTab.reloadKey} />
@@ -185,8 +182,6 @@ export function BrowserWindow() {
             onSignOut={() => void signOut()}
             dark={dark}
             onToggleDark={setDark}
-            performance={performance}
-            onTogglePerformance={setPerformance}
             glassOpacity={glassOpacity}
             onGlassOpacityChange={setGlassOpacity}
           />
@@ -196,7 +191,7 @@ export function BrowserWindow() {
 
   return (
     <div
-      className={`h-screen ${dark ? 'dark' : ''} ${performance ? 'valora-perf' : ''}`}
+      className={`h-screen ${dark ? 'dark' : ''}`}
       style={{ '--glass-alpha': glassOpacity / 100 } as CSSProperties}
     >
       <div className="valora-wallpaper flex h-full flex-col text-slate-900 dark:text-slate-100">

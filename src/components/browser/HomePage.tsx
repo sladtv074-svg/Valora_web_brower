@@ -1,23 +1,18 @@
 import { useState, type FormEvent } from 'react';
 import { ArrowRight, Plus, Search, ShieldCheck, X, Zap } from 'lucide-react';
 import { Logo } from '@/components/Logo';
-import { Toggle } from '@/components/ui/Toggle';
 import type { QuickLink } from '@/lib/urls';
 
 interface HomePageProps {
   quickLinks: QuickLink[];
   onNavigate: (input: string) => void;
   onOpenFavorites: () => void;
-  performance: boolean;
-  onTogglePerformance: (value: boolean) => void;
 }
 
 export function HomePage({
   quickLinks,
   onNavigate,
   onOpenFavorites,
-  performance,
-  onTogglePerformance,
 }: HomePageProps) {
   const [query, setQuery] = useState('');
   const [showWelcome, setShowWelcome] = useState(true);
@@ -32,9 +27,6 @@ export function HomePage({
 
   return (
     <div className="relative flex h-full flex-col overflow-y-auto">
-      <div className="valora-glow pointer-events-none absolute -top-48 left-1/2 h-[520px] w-[760px] -translate-x-1/2 rounded-full bg-sky-500/20 blur-3xl dark:bg-sky-500/25" />
-      <div className="valora-glow pointer-events-none absolute -bottom-40 -right-20 h-[420px] w-[520px] rounded-full bg-cyan-400/15 blur-3xl" />
-
       <div className="relative z-10 flex justify-end px-4 pt-5 sm:px-8">
         <div className="flex max-w-xs items-center gap-3 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm dark:border-white/10 dark:bg-white/5">
           <ShieldCheck className="h-5 w-5 shrink-0 text-sky-600 dark:text-sky-400" />
@@ -46,13 +38,13 @@ export function HomePage({
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 py-10">
-        <Logo className="h-24 w-24 drop-shadow-[0_0_28px_rgba(56,189,248,0.35)] sm:h-28 sm:w-28" />
+        <Logo className="h-24 w-24 sm:h-28 sm:w-28" />
         <h1 className="mt-3 text-5xl font-semibold tracking-tight text-slate-900 dark:text-white">Valora</h1>
         <p className="mt-2 text-base text-sky-700 dark:text-sky-300">Explorez. Découvrez. Profitez.</p>
 
         <form
           onSubmit={handleSubmit}
-          className="mt-10 flex w-full max-w-2xl items-center gap-3 rounded-full border border-slate-200 bg-white py-2 pl-6 pr-2 shadow-lg shadow-sky-900/5 transition focus-within:ring-4 focus-within:ring-sky-500/20 dark:border-sky-400/40 dark:bg-slate-900/60 dark:shadow-[0_0_28px_-6px_rgba(56,189,248,0.55)] dark:backdrop-blur-xl"
+          className="valora-glass mt-10 flex w-full max-w-2xl items-center gap-3 rounded-full border border-white/50 py-2 pl-6 pr-2 transition focus-within:ring-4 focus-within:ring-sky-500/20 dark:border-white/10"
         >
           <Search className="h-5 w-5 shrink-0 text-slate-500 dark:text-slate-400" />
           <input
@@ -61,7 +53,7 @@ export function HomePage({
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Rechercher sur le web"
             aria-label="Rechercher sur le web"
-            className="min-w-0 flex-1 bg-transparent py-2.5 text-base text-slate-900 outline-none placeholder:text-slate-500 dark:text-slate-100 dark:placeholder:text-slate-400"
+            className="min-w-0 flex-1 bg-transparent py-2.5 text-base font-medium text-slate-900 outline-none placeholder:text-slate-600 dark:text-slate-100 dark:placeholder:text-slate-400"
           />
           <button
             type="submit"
@@ -120,11 +112,6 @@ export function HomePage({
           <span />
         )}
 
-        <div className="flex items-center gap-3 self-end rounded-2xl border border-slate-200 bg-white/90 py-2.5 pl-4 pr-3 shadow-sm dark:border-white/10 dark:bg-white/5">
-          <Zap className="h-4 w-4 text-sky-600 dark:text-sky-400" />
-          <span className="text-sm font-medium text-slate-900 dark:text-slate-100">Mode performance</span>
-          <Toggle checked={performance} onChange={onTogglePerformance} label="Mode performance" />
-        </div>
       </div>
     </div>
   );
