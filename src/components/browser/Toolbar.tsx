@@ -81,7 +81,7 @@ export function Toolbar({
   };
 
   return (
-    <header className="flex items-center gap-1.5 border-b border-slate-200 bg-white px-3 py-2 dark:border-white/10 dark:bg-slate-900">
+    <header className="valora-glass mx-2 mt-2 flex items-center gap-1.5 rounded-2xl px-3 py-2">
       <IconButton icon={ArrowLeft} label="Page précédente" onClick={onBack} disabled={!canGoBack} />
       <IconButton icon={ArrowRight} label="Page suivante" onClick={onForward} disabled={!canGoForward} />
       <IconButton icon={RotateCw} label="Actualiser" onClick={onReload} disabled={!hasPage} />

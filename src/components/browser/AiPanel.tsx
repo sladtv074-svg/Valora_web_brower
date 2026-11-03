@@ -88,7 +88,7 @@ export function AiPanel({ hasPage, activity, onClose, onNavigate, onBookmark }: 
   };
 
   return (
-    <aside className="absolute inset-y-0 right-0 z-20 flex w-full max-w-sm flex-col border-l border-slate-200 bg-white shadow-2xl shadow-slate-900/10 sm:static sm:z-auto sm:w-80 sm:shadow-none dark:border-white/10 dark:bg-slate-900">
+    <aside className="valora-glass absolute inset-y-0 right-0 z-20 m-2 flex w-[calc(100%-1rem)] max-w-sm flex-col rounded-3xl sm:static sm:z-auto sm:m-2 sm:ml-0 sm:w-80">
       <header className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-white/10">
         <div className="flex items-center gap-2.5">
           <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-500 text-white">

@@ -11,6 +11,7 @@ import { SettingsPage } from '@/components/browser/SettingsPage';
 import { Sidebar } from '@/components/browser/Sidebar';
 import { TabBar } from '@/components/browser/TabBar';
 import { Toolbar } from '@/components/browser/Toolbar';
+import { LiquidGlassFilter } from '@/components/ui/LiquidGlassFilter';
 import { useProfile } from '@/hooks/useProfile';
 import { useAuth } from '@/hooks/useAuth';
 import { useAvailableDownloads } from '@/hooks/useAvailableDownloads';
@@ -194,6 +195,7 @@ export function BrowserWindow() {
       className={`h-screen ${dark ? 'dark' : ''}`}
       style={{ '--glass-alpha': glassOpacity / 100 } as CSSProperties}
     >
+      <LiquidGlassFilter />
       <div className="valora-wallpaper flex h-full flex-col text-slate-900 dark:text-slate-100">
         <TabBar
           tabs={tabs}
