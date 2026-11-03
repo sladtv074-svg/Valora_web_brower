@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 
 const GREETING = 'Bonjour';
 const FIRST_LETTER_DELAY_MS = 900;
 const LETTER_INTERVAL_MS = 120;
+const HOLD_MS = 1400;
+const EXIT_MS = 600;
 
 interface SplashScreenProps {
   onContinue: () => void;
@@ -12,6 +13,7 @@ interface SplashScreenProps {
 
 export function SplashScreen({ onContinue }: SplashScreenProps) {
   const [visibleCount, setVisibleCount] = useState(0);
+  const [leaving, setLeaving] = useState(false);
   const isComplete = visibleCount === GREETING.length;
 
   useEffect(() => {
@@ -21,14 +23,31 @@ export function SplashScreen({ onContinue }: SplashScreenProps) {
     return () => window.clearTimeout(timer);
   }, [visibleCount, isComplete]);
 
+  useEffect(() => {
+    if (!isComplete) return;
+    const hold = window.setTimeout(() => setLeaving(true), HOLD_MS);
+    return () => window.clearTimeout(hold);
+  }, [isComplete]);
+
+  useEffect(() => {
+    if (!leaving) return;
+    const exit = window.setTimeout(onContinue, EXIT_MS);
+    return () => window.clearTimeout(exit);
+  }, [leaving, onContinue]);
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center overflow-hidden bg-white px-6">
+    <div
+      className={`flex min-h-screen flex-col items-center justify-center overflow-hidden bg-white px-6 ${
+        leaving ? 'valora-splash-exit' : ''
+      }`}
+    >
       <div className="relative flex items-center justify-center">
-        <p
-          aria-label={GREETING}
-          className="text-5xl font-semibold tracking-tight text-slate-900 sm:text-7xl"
-        >
-          {GREETING.slice(0, visibleCount)}
+        <p aria-label={GREETING} className="flex text-5xl font-semibold tracking-tight text-slate-900 sm:text-7xl">
+          {GREETING.split('').slice(0, visibleCount).map((letter, index) => (
+            <span key={index} className="valora-letter-in inline-block">
+              {letter}
+            </span>
+          ))}
         </p>
         <div className="absolute inset-y-0 left-full flex items-center">
           <div className="valora-roll h-20 w-20 sm:h-28 sm:w-28">
@@ -36,18 +55,6 @@ export function SplashScreen({ onContinue }: SplashScreenProps) {
           </div>
         </div>
       </div>
-
-      <button
-        type="button"
-        onClick={onContinue}
-        disabled={!isComplete}
-        className={`mt-16 inline-flex items-center gap-2 rounded-full bg-slate-900 px-8 py-3.5 text-base font-medium text-white shadow-lg shadow-slate-900/20 transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/40 ${
-          isComplete ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0'
-        }`}
-      >
-        Continuer
-        <ArrowRight className="h-4 w-4" />
-      </button>
     </div>
   );
 }

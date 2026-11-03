@@ -43,6 +43,35 @@
   animation: valora-fade-up 0.45s ease-out both;
 }
 
+@keyframes valora-letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em) scale(0.9);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.valora-letter-in {
+  animation: valora-letter-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes valora-splash-exit {
+  to {
+    opacity: 0;
+    transform: scale(1.06);
+    filter: blur(12px);
+  }
+}
+
+.valora-splash-exit {
+  animation: valora-splash-exit 0.6s ease-in forwards;
+}
+
 :root {
   --glass-rgb: 255 255 255;
   --glass-alpha: 0.6;
